@@ -48,3 +48,44 @@ exports.registerUser = async (req, res) => {
     }
 };
 
+exports.loginUser = async (req, res) => {
+    const { username, password } = req.body;
+
+    // 🧪 Validate input
+    if (!username || !password) {
+        return res.status(400).json({
+            message: "Username and Password are required.",
+        });
+    }
+
+    try {
+        // 🔐 Call service to authenticate user
+        const loggedInUser = await authService.loginUser({ username, password });
+
+        // ✅ Respond with user info + token
+        return res.status(200).json({
+            message: "User logged in successfully",
+            user: loggedInUser,
+        });
+    } catch (error) {
+        console.error("❌ Error in loginUser:", error.message);
+
+        const knownAuthErrors = [
+            "Invalid username or password.",
+            "User not found.",
+        ];
+
+        if (knownAuthErrors.includes(error.message)) {
+            return res.status(401).json({ message: error.message });
+        }
+
+        if (error.message.startsWith("Error while logging in user:")) {
+            return res.status(500).json({ message: error.message });
+        }
+
+        return res.status(500).json({
+            message: "Internal Server Error",
+            error: error.message,
+        });
+    }
+};

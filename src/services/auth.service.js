@@ -71,3 +71,52 @@ exports.registerUser = async ({ username, email, password, bio }) => {
         throw new Error("Error while registering user: " + error.message);
     }
 };
+
+// ✅ Login User Service
+
+exports.loginUser = async ({ username, password }) => {
+    try {
+        // 🧪 Input validation
+        if (!username || !password) {
+            throw new Error("Username and Password are required.");
+        }
+
+        // 🔍 Find user by username
+        const users = await query("SELECT * FROM users WHERE username = ?", [username]);
+
+        if (users.length === 0) {
+            throw new Error("Invalid username or password.");
+        }
+
+        const user = users[0];
+
+        // 🔐 Compare hashed password
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new Error("Invalid username or password.");
+        }
+
+        // 🔑 Generate JWT token
+        const payload = {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+        };
+
+        const token = jwt.sign(payload, process.env.SECRET_JWT_KEY, {
+            expiresIn: process.env.JWT_EXPIRES_IN || "7d",
+        });
+
+        // ✅ Return user info and token
+        return {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            bio: user.bio,
+            token,
+        };
+    } catch (error) {
+        console.error("Error in loginUser service:", error);
+        throw new Error(error.message);
+    }
+};
