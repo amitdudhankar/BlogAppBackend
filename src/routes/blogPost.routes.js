@@ -8,8 +8,25 @@ const upload = require("../middlewares/multer.middleware"); // ✅ import multer
 router.post(
   "/add-blog",
   verifyToken,
-  upload.single("thumbnail"), 
+  upload.single("thumbnail"),
   blogPostController.addBlogPost
+);
+router.put(
+  "/update-blog/:blogid",
+  verifyToken,
+  upload.single("thumbnail"),
+  blogPostController.updateBlogPost
+);
+router.get(
+  "/get-all-blogs",
+  verifyToken,
+  upload.single("thumbnail"),
+  blogPostController.getAllBlogPost
+);
+router.delete(
+  "/delete-blog/:blogid",
+  verifyToken,
+  blogPostController.deleteBlogPost
 );
 
 // ✅ Export the router

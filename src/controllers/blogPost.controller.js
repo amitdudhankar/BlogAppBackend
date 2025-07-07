@@ -54,3 +54,117 @@ exports.addBlogPost = async (req, res) => {
     });
   }
 };
+
+
+exports.updateBlogPost = async (req, res) => {
+  try {
+    const { title, content } = req.body;
+    const file = req.file;
+    const id = req.params.blogid;
+
+    if (!id) {
+      return res.status(400).json({ message: "Post ID is required." });
+    }
+
+    const updates = {};
+
+    if (title) updates.title = title;
+    if (content) updates.content = content;
+    if (file) {
+      updates.thumbnail = `${req.protocol}://${req.get("host")}/uploads/thumbnails/${file.filename}`;
+    }
+
+    if (Object.keys(updates).length === 0) {
+      return res.status(400).json({ message: "At least one field must be provided for update." });
+    }
+
+    // 👇 Call service with ID and dynamic updates
+    const updatedBlogPost = await blogPostService.updateBlogPost({ id, ...updates });
+
+    return res.status(200).json({
+      message: "Blog post updated successfully",
+      blogPost: updatedBlogPost,
+    });
+  } catch (error) {
+    console.error("❌ Error in updateBlogPost:", error);
+    return res.status(500).json({
+      message: "Something went wrong while updating the blog post.",
+      error: error.message,
+    });
+  }
+};
+exports.getAllBlogPost = async (req, res) => {
+  try {
+    // 🛠️ Call service to get all blog posts
+    const blogPosts = await blogPostService.getAllBlogPost();
+
+    // ✅ Respond with success
+    return res.status(200).json({
+      message: "All blog posts retrieved successfully",
+      blogPosts,
+    });
+  } catch (error) {
+    console.error("❌ Error in getAllBlogPost:", error);
+    return res.status(500).json({
+      message: "Something went wrong while retrieving blog posts.",
+      error: error.message,
+    });
+  }
+}
+
+exports.deleteBlogPost = async (req, res) => {
+  try {
+    const id = req.params.blogid;
+    const userId = req.user.id; // 👈 assuming you've set this via middleware
+
+    if (!id) {
+      return res.status(400).json({ message: "Post ID is required." });
+    }
+
+    // 🛠️ Call service to delete blog post
+    const result = await blogPostService.deleteBlogPost(id, userId);
+
+    // ✅ Respond with success
+    return res.status(200).json({
+      message: result.message,
+      blogPostId: id,
+    });
+
+  } catch (error) {
+    console.error("❌ Error in deleteBlogPost:", error);
+    return res.status(500).json({
+      message: "Something went wrong while deleting the blog post.",
+      error: error.message,
+    });
+  }
+};
+
+
+// exports.deleteBlogPost = async (req, res) => {
+//   try {
+//     const id = req.params.blogid;
+
+//     if (!id) {
+//       return res.status(400).json({ message: "Post ID is required." });
+//     }
+
+//     // 🛠️ Call service to delete blog post
+//     const result = await blogPostService.deleteBlogPost(id);
+
+//     if (result.affectedRows === 0) {
+//       return res.status(404).json({ message: "Blog post not found." });
+//     }
+
+//     // ✅ Respond with success
+//     return res.status(200).json({
+//       message: "Blog post deleted successfully",
+//       blogPostId: id,
+//     });
+//   } catch (error) {
+//     console.error("❌ Error in deleteBlogPost:", error);
+//     return res.status(500).json({
+//       message: "Something went wrong while deleting the blog post.",
+//       error: error.message,
+//     });
+//   }
+// };
