@@ -20,12 +20,14 @@ app.use(logApi); // ⬅️ Log every incoming request
 const authRoutes = require('./src/routes/auth.routes');
 const blogPostRoutes = require('./src/routes/blogPost.routes');
 const commentRoutes = require('./src/routes/comments.routes');
+const postLikesRoutes = require('./src/routes/postLikes.routes');
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/blogpost', blogPostRoutes);
 app.use('/api/v1/comments', commentRoutes);
+app.use('/api/v1/post-likes', postLikesRoutes);
 
 // Default route
 app.get('/', (req, res) => {
