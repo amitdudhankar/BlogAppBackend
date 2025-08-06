@@ -20,58 +20,29 @@ A robust RESTful backend built with **Node.js** and **Express.js** for a feature
 
 ## 📁 Project Structure
 
+```
+
 BLOGAPPBACKEND/
 │
-├── .vscode/
-│   └── launch.json              # VSCode debug configuration
-│
-├── node_modules/                # Dependencies
+├── .vscode/                  # VSCode launch config
 │
 ├── src/
-│   ├── config/
-│   │   └── db.config.js         # Database pool configuration (MySQL)
-│   │
-│   ├── controllers/             # All route business logic
-│   │   ├── auth.controller.js
-│   │   ├── blogPost.controller.js
-│   │   ├── comment.controller.js
-│   │   ├── postLikes.controller.js
-│   │   ├── postTags.controller.js
-│   │   └── tags.controller.js
-│   │
-│   ├── middlewares/
-│   │   ├── auth.middleware.js   # JWT auth and RBAC
-│   │   ├── logs.middleware.js   # Request logging
-│   │   └── multer.middleware.js # File upload config for thumbnails
-│   │
-│   ├── routes/
-│   │   ├── auth.routes.js
-│   │   ├── blogPost.routes.js
-│   │   ├── comments.routes.js
-│   │   ├── postLikes.routes.js
-│   │   ├── postTags.routes.js
-│   │   └── tags.routes.js
-│   │
-│   ├── services/
-│   │   ├── auth.service.js
-│   │   ├── blogPost.service.js
-│   │   ├── comments.service.js
-│   │   ├── postLikes.service.js
-│   │   ├── postTags.service.js
-│   │   └── tags.service.js
-│   │
-│   ├── uploads/                 # For uploaded thumbnails
-│   └── utils/
-│       └── db.js                # DB query utility using config
+│   ├── config/               # DB configuration
+│   ├── controllers/          # All route logic
+│   ├── middlewares/          # Auth, logs, upload
+│   ├── routes/               # API route declarations
+│   ├── services/             # Business logic
+│   ├── uploads/              # For thumbnails
+│   └── utils/                # DB utility
 │
-├── .env                         # Environment variables
-├── .gitignore                   # Git ignore rules
-├── Blog App.postman_collection  # Sample API collection for Postman
-├── package.json                 # Node.js dependencies
+├── .env                      # Environment variables
+├── .gitignore
+├── Blog App.postman\_collection
+├── package.json
 ├── package-lock.json
-└── server.js                    # App entry point
+└── server.js                 # App entry point
 
----
+````
 
 ## 🔧 Tech Stack
 
