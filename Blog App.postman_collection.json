@@ -1,0 +1,808 @@
+{
+	"info": {
+		"_postman_id": "3e443da8-caa0-44b7-8503-3c0c64bb6b64",
+		"name": "Blog App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32252088",
+		"_collection_link": "https://blog-app-team-8996.postman.co/workspace/Blog-App~10d427ba-d703-44b7-8b40-c34e2d3ac845/collection/32252088-3e443da8-caa0-44b7-8503-3c0c64bb6b64?action=share&source=collection_link&creator=32252088"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"amit_dudhankar\",\r\n    \"password\":\"Amitkd@11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/auth/login",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"amit_dudhankar\",\r\n  \"email\": \"akdudhankar11@gmail.com\",\r\n  \"password\": \"Amitkd@11\",\r\n  \"bio\": \"MERN & Angular Dev from India\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/auth/signup",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog Posts",
+			"item": [
+				{
+					"name": "Add Blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Hello this is 2nd Blog",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "<h1>Hello, this is testing blog 2</h1>",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/PlantUML.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Base_URL}}/blogpost/add-blog",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"blogpost",
+								"add-blog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Hello this is edited Blog",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "<p>Hello this is updated blog</p>",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/Mermaid.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Base_URL}}/blogpost/update-blog",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"blogpost",
+								"update-blog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Blogs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/blogpost/get-all-blogs",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"blogpost",
+								"get-all-blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/blogpost/delete-blog/3",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"blogpost",
+								"delete-blog",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Add Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Hello this is 1st Blog",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "<h1>Hello, this is testing blog 1</h1>",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/PlantUML.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Base_URL}}/comments/add-comment",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"comments",
+								"add-comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"Hello this is a updated comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/comments/update-comment/1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"comments",
+								"update-comment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comments By PostID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/comments/get-comments/1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"comments",
+								"get-comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/comments/delete-comment/1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"comments",
+								"delete-comment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post Likes",
+			"item": [
+				{
+					"name": "Like a Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"amit_dudhankar\",\r\n    \"password\":\"Amitkd@11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/post-likes/add-comment",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"post-likes",
+								"add-comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unlike a Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/post-likes/unlike/1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"post-likes",
+								"unlike",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Likes Count By PostID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/post-likes/count/1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"post-likes",
+								"count",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Liked By Current User or Not",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Who Liked Post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/post-likes/users/1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"post-likes",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post Tags",
+			"item": [
+				{
+					"name": "Add Post Tags",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"postId\": 1,\r\n  \"tagId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/post-tags/add-post-tag",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"post-tags",
+								"add-post-tag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Tag From Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/post-tags/remove-post-tag/1/4",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"post-tags",
+								"remove-post-tag",
+								"1",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tags for a Post",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/post-tags/get-all-tags-for-post/1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"post-tags",
+								"get-all-tags-for-post",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Post By Tag",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/post-tags/get-posts-by-tag/1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"post-tags",
+								"get-posts-by-tag",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "Add Tags",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"names\": [\r\n        \"api\",\r\n        \"javascript\",\r\n        \"rest\",\r\n        \"mongodb\",\r\n        \"database\",\r\n        \"server\",\r\n        \"middleware\",\r\n        \"typescript\",\r\n        \"npm\",\r\n        \"graphql\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/tags/create-tag",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"tags",
+								"create-tag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tag",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"newTagName\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/tags/update-tag/1",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"tags",
+								"update-tag",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tag",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/tags/delete-tag/10",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"tags",
+								"delete-tag",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tag By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/tags/get-tags/9",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"tags",
+								"get-tags",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tags",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/tags/get-all-tags",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"tags",
+								"get-all-tags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Base_URL",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "Token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbWl0X2R1ZGhhbmthciIsImVtYWlsIjoiYWtkdWRoYW5rYXIxMUBnbWFpbC5jb20iLCJpYXQiOjE3NTQ0NjM4MTEsImV4cCI6MTc1NTA2ODYxMX0.sOTR1IsSdcf7QufnHfLPA3NP2tPHAU5WGHfI5t5x0fo",
+			"type": "string"
+		}
+	]
+}
