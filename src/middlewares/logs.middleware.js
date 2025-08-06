@@ -20,13 +20,13 @@ exports.logApi = (req, res, next) => {
         if ("password" in safeBody) safeBody.password = "***";
 
         const log = [
-            `📩 [${new Date().toLocaleString()}]`,
-            `🛣️  ${method} ${originalUrl}`,
-            `👤 User ID: ${userId}`,
-            `🌐 IP: ${ip}`,
-            `🕒 Duration: ${duration}ms`,
-            `📦 Body: ${JSON.stringify(safeBody)}`,
-            `✅ Status: ${res.statusCode}`
+            `[${new Date().toLocaleString()}]`,
+            ` ${method} ${originalUrl}`,
+            `User ID: ${userId}`,
+            `IP: ${ip}`,
+            `Duration: ${duration}ms`,
+            `Body: ${JSON.stringify(safeBody)}`,
+            `Status: ${res.statusCode}`
         ].join(" | ");
 
         console.log(log);
